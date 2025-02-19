@@ -7,7 +7,7 @@ function NotFound() {
         Halaman Tidak Ditemukan 404
       </h1>
       <p>
-        Silakan Kembali Ke Halaman <Link className="underline">Home</Link>{" "}
+        Silakan Kembali Ke Halaman <Link to="/" className="underline">Home</Link>
       </p>
     </>
   );
