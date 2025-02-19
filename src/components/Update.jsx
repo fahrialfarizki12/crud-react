@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
-
 import axios from "axios";
 import Swal from "sweetalert2";
 
@@ -13,6 +12,29 @@ function Update() {
 
   const { id } = useParams();
   const navigate = useNavigate();
+
+  // Fungsi untuk mengambil data pengguna berdasarkan ID
+  const fetchUser = async () => {
+    try {
+      const response = await axios.get(API + "/users/" + id);
+      const user = response.data;
+      setName(user.name);
+      setEmail(user.email);
+      setPassword(user.password || ""); // Mengisi password jika ada (untuk testing)
+    } catch (error) {
+      Swal.fire({
+        title: "Gagal!",
+        text: "Gagal mengambil data pengguna!",
+        icon: "error",
+        confirmButtonText: "Oke",
+      });
+    }
+  };
+
+  // Mengambil data pengguna saat komponen pertama kali di-render
+  useEffect(() => {
+    fetchUser();
+  }, []);
 
   const handleUpdate = async (e) => {
     e.preventDefault();
